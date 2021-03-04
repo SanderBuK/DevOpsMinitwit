@@ -4,18 +4,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
 using System.Threading.Tasks;
 using MiniTwit.Entities;
+using MiniTwit.Models;
 using Xunit;
 
 namespace Models.Test
 {
     public class UserRepositoryTests : IDisposable
     {
-        private readonly MinitwitContext context;
+        private readonly MiniTwitContext context;
         private readonly UserRepository repo;
 
         public UserRepositoryTests()
         {
-            var builder = new DbContextOptionsBuilder<MinitwitContext>().UseInMemoryDatabase("MiniTwitTest");
+            var builder = new DbContextOptionsBuilder<MiniTwitContext>().UseInMemoryDatabase("MiniTwitTest");
             context = new MinitwitTestContext(builder.Options);
             context.Database.EnsureCreated();
             repo = new UserRepository(context);
@@ -24,27 +25,25 @@ namespace Models.Test
         [Fact]
         public async Task create_user_succesfully()
         {
-            var result = await repo.CreateAsync(
+            var result = await repo.RegisterUser(
                 new UserCreateDTO { 
                     Username = "userTest", 
                     Email = "userTest@mail.io", 
-                    Password1 = "123", 
-                    Password2 = "123" }
+                    Password = "123" }
                 );
-            var userQuery = from u in context.users where u.username == "userTest" select u;
+            var userQuery = from u in context.Users where u.Username == "userTest" select u;
             var user = await userQuery.FirstOrDefaultAsync();
 
             Assert.NotNull(user);
-            Assert.Equal(user.username, "userTest");
-            Assert.Equal(user.email, "userTest@mail.io");
-            Assert.NotEqual(user.pw_hash, "123");
+            Assert.Equal(user.Username, "userTest");
+            Assert.Equal(user.Email, "userTest@mail.io");
+            Assert.NotEqual(user.PwHash, "123");
         }
 
         [Fact]
         public async Task create_user_taken_username()
         {
-            var result = await repo.CreateAsync(n
-                ew UserCreateDTO { 
+            var result = await repo.CreateAsync(new UserCreateDTO { 
                     Username = "olduser1", 
                     Email = "test@mail.com", 
                     Password1 = "123", 
