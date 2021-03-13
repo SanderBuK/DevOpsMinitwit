@@ -27,9 +27,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: docker-compose push
+      - name: build containers
         run: |
           docker-compose up -d
+          
+      - name: push images
+        run: |
           docker-compose push
       
   deploy:
