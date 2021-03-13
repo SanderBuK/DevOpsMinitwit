@@ -33,7 +33,7 @@ jobs:
           
       - name: push images
         run: |
-          docker_push.sh
+          ./docker_push.sh
       
   deploy:
     runs-on: ubuntu-latest
