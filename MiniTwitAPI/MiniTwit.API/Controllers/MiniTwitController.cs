@@ -38,7 +38,7 @@ namespace MiniTwit.API.Controllers
         [HttpGet]
         public dynamic GetStatus()
         {
-            return new { go_to = "/swagger/index.html" };
+            return new { welcome_to = "MiniTwit API" };
         }
 
         [HttpGet("latest/")]
