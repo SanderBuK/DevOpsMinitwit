@@ -4,7 +4,7 @@ on:
   push:
     # Publish `main` as Docker `latest` image.
     branches:
-      - 'development'
+      - 'main'
 
 env:
   # TODO: Change variable to your image's name.
