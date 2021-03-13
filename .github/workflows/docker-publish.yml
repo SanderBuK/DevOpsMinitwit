@@ -34,7 +34,7 @@ jobs:
       - name: push images
         run: |
           sudo chmod +x ./docker_push.sh
-          ./docker_push.sh
+          ./docker_push.sh ${{ secrets.DOCKER_ACCESS_TOKEN }} ${{ secrets.DOCKER_ID }}
       
   deploy:
     runs-on: ubuntu-latest
