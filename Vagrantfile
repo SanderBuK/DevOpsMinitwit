@@ -9,12 +9,12 @@ Vagrant.configure("2") do |config|
 	config.vm.synced_folder ".", "/vagrant", disabled: true#sync folder between host and guest. Does not work for me
 
 	#Create a droplet with the define name. Needs a token from digitalocean.
-	config.vm.define "NavngivDropletHer", primary: true do |server|
+	config.vm.define "minitwit", primary: true do |server|
 	  server.vm.provider :digital_ocean do |provider|
 		provider.ssh_key_name = ENV["DIGITAL_OCEAN_KEYNAME"]#create or read public key on DigitalOcean
 		provider.token = ENV["DIGITAL_OCEAN_TOKEN"]#Use token to create droplet on DigitalOcean
 		provider.image = 'docker-18-04'#Choose droplet image to create
-		provider.region = 'fra1'#select which region droplet is located in
+		provider.region = 'AMS3'#select which region droplet is located in
 		provider.size = 's-1vcpu-1gb'#select cpu and so on for droplet
 		provider.privatenetworking = true
 	  end
