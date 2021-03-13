@@ -33,6 +33,7 @@ jobs:
           
       - name: push images
         run: |
+          sudo chmod 600 ./docker_push.sh
           ./docker_push.sh
       
   deploy:
