@@ -1,2 +1,4 @@
-docker-compose -f DevOpsMinitwit/docker-compose.yml pull
-docker-compose -f DevOpsMinitwit/docker-compose.yml up -d
+cd DevOpsMinitwit
+git pull
+docker-compose pull
+docker-compose up -d
