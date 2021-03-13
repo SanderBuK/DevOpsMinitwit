@@ -31,7 +31,7 @@ jobs:
       - run: |
           docker-compose -f $COMPOSE_FILE push
       
-Deploy:
+  Deploy:
     runs-on: ubuntu-latest
     needs: Push
 
