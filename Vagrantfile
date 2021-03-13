@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
 			"DOCKER_ID"=>ENV['DOCKER_ID']}, 
 		inline: <<-SHELL
 		echo pulling git repository
-		git clone --single-branch --branch development https://github.com/SanderBuK/DevOpsMinitwit.git
+		git clone https://github.com/SanderBuK/DevOpsMinitwit.git
 		echo login docker
 		echo "$DOCKER_TOKEN" > ~/my_password.txt
 		cat ~/my_password.txt |docker login -u "${DOCKER_ID}" --password-stdin
