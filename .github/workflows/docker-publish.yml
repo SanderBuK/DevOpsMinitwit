@@ -4,7 +4,7 @@ on:
   push:
     # Publish `main` as Docker `latest` image.
     branches:
-      - feature/61/actionsSetup
+      - 'feature/61/actionsSetup'
 
 env:
   # TODO: Change variable to your image's name.
@@ -19,7 +19,7 @@ jobs:
       - name: test step 1
       - uses: actions/checkout@v2
       - run: |
-          echo jeg tester ting
+          echo jeg tester ting :D
           
   push:
     runs-on: ubuntu-latest
