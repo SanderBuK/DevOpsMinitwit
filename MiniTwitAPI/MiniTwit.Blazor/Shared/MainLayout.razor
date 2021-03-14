@@ -16,17 +16,17 @@
             if (currentUser != null)
             {
                 <div>
-                    <a href="">my timeline</a> |
-                    <a href="public">public timeline</a> |
-                    <a href="public" @onclick="@Logout">sign out @currentUser.Username</a>
+                    <a href="">My Timeline</a> |
+                    <a href="public">Public Timeline</a> |
+                    <a href="public" @onclick="@Logout">Sign out - @currentUser.Username</a>
                 </div>
             }
             else
             {
                 <div>
-                    <a href="public">public timeline</a> |
-                    <a href="register">sign up</a> |
-                    <a href="login">sign in</a>
+                    <a href="public">Public Timeline</a> |
+                    <a href="register">Sign up</a> |
+                    <a href="login">Sign in</a>
                 </div>
             }
         }
