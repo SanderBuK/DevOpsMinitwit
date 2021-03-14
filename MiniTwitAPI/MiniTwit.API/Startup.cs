@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Components;
 using MiniTwit.Entities;
 using MiniTwit.Models;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using MySql.Data.EntityFramework;
 
 namespace MiniTwit.API
@@ -72,11 +73,14 @@ namespace MiniTwit.API
 
             app.UseSession();
 
+            app.UseHttpMetrics();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
         }
     }
