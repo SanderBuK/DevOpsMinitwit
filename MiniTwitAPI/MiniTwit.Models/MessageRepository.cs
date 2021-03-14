@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 using MiniTwit.Entities;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.HttpStatusCode;
@@ -67,6 +63,7 @@ namespace MiniTwit.Models
                                               Flagged = m.Flagged,
                                               Text = m.Text
                                           }).FirstOrDefault());
+            
             return await message;
         }
 
@@ -76,7 +73,7 @@ namespace MiniTwit.Models
 
             var messages = await (from m in _context.Messages
                                         join u in _context.Users on m.AuthorId equals u.UserId
-                                        where m.AuthorId == userId
+                                  where m.AuthorId == userId
                                   select new TimelineDTO
                                   {
                                       message = m,
@@ -97,6 +94,7 @@ namespace MiniTwit.Models
                                                Flagged = m.Flagged,
                                                Text = m.Text
                                            }).ToList());
+            
             return await messages;
         }
 
@@ -105,6 +103,7 @@ namespace MiniTwit.Models
             var user_id = await Task.Run(() => (from u in _context.Users
                                                 where u.Username == username
                                                 select u.UserId).FirstOrDefault());
+            
             return user_id;
         }
     }
