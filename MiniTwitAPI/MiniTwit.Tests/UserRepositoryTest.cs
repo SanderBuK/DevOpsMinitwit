@@ -14,9 +14,6 @@ namespace Models.Test
     {
         private readonly MiniTwitContext context;
         private readonly UserRepository repo;
-        //private readonly SqliteConnection connection;
-        //private readonly DbContextOptions options;
-
 
         public UserRepositoryTests()
         {
@@ -24,11 +21,13 @@ namespace Models.Test
             builder.UseInMemoryDatabase(databaseName: "MiniTwitDatabase");   //.UseSqlite("datasource=:memory:");
 
             var dbContextOptions = builder.Options;
-            context = new MiniTwitContext(dbContextOptions); //maybe should be ContextTest??
+            context = new MiniTwitContext(dbContextOptions);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+
             repo = new UserRepository(context);
         }
+
         public void Dispose()
         {
             context.Dispose();
@@ -44,9 +43,11 @@ namespace Models.Test
                     Email = "userTest@mail.com",
                     Password = "123"
                 });
+
             var userQuery = from u in context.Users 
                             where u.Username == "userTest" 
                             select u;
+            
             var user = await userQuery.FirstOrDefaultAsync();
 
             Assert.NotNull(user);
