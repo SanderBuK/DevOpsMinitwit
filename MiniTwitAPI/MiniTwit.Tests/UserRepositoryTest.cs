@@ -53,7 +53,7 @@ namespace Models.Test
                 new UserCreateDTO
                 {
                     Username = "userTest",
-                    Email = "userTest@mail.io",
+                    Email = "userTest@mail.com",
                     Password = "123"
                 });
             var userQuery = from u in context.Users 
@@ -63,7 +63,7 @@ namespace Models.Test
 
             Assert.NotNull(user);
             Assert.Equal("userTest", user.Username);
-            Assert.Equal("userTest@mail.io", user.Email);
+            Assert.Equal("userTest@mail.com", user.Email);
             Assert.NotEqual("123", user.PwHash);
         }
 
