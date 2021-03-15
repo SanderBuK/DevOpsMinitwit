@@ -37,6 +37,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\MiniTwit.Entities\MiniTwit.Entities.csproj" />
 		<ProjectReference Include="..\MiniTwit.Models\MiniTwit.Models.csproj" />
 	</ItemGroup>

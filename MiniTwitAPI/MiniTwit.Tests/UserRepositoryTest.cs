@@ -6,20 +6,44 @@ using MiniTwit.Entities;
 using Xunit;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using MiniTwit.Models;
+using Microsoft.Data.Sqlite;
 
 namespace Models.Test
 {
-    public class UserRepositoryTests
+    public class UserRepositoryTests : IDisposable
     {
         private readonly MiniTwitContext context;
         private readonly UserRepository repo;
+        //private readonly SqliteConnection connection;
+        //private readonly DbContextOptions options;
+
 
         public UserRepositoryTests()
         {
-            var builder = new DbContextOptionsBuilder<MiniTwitContext>().UseSqlite("DataSource=:memory:");
-            context = new ContextTest(builder.Options);
+            var builder = new DbContextOptionsBuilder<MiniTwitContext>();
+            builder.UseInMemoryDatabase(databaseName: "MiniTwitDatabase");   //.UseSqlite("datasource=:memory:");
+
+            var dbContextOptions = builder.Options;
+            context = new MiniTwitContext(dbContextOptions); //maybe should be ContextTest??
+            //context = new ContextTest(builder);
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             repo = new UserRepository(context);
+
+            //connection = new SqliteConnection("DataSource=:memory:");
+            //connection.Open();
+
+            //options = new DbContextOptionsBuilder()
+            //    .UseSqlite(connection)
+            //    .Options;
+
+            //using (var context = new ContextTest(options) )
+            //    context.Database.EnsureCreated();
+            //repo = new UserRepository(context);
+        }
+        public void Dispose()
+        {
+            context.Dispose();
         }
 
         [Fact]
