@@ -31,9 +31,10 @@ namespace Models.Test
                     Username = "userTest",
                     Email = "userTest@mail.io",
                     Password = "123"
-                }
-                );
-            var userQuery = from u in context.Users where u.Username == "userTest" select u;
+                });
+            var userQuery = from u in context.Users 
+                            where u.Username == "userTest" 
+                            select u;
             var user = await userQuery.FirstOrDefaultAsync();
 
             Assert.NotNull(user);
