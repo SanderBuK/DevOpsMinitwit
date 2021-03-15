@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace MiniTwit.Models
+﻿namespace MiniTwit.Models
 {
     internal class Program
     {
