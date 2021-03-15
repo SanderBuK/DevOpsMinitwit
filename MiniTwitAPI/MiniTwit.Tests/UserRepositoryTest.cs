@@ -25,7 +25,6 @@ namespace Models.Test
 
             var dbContextOptions = builder.Options;
             context = new MiniTwitContext(dbContextOptions); //maybe should be ContextTest??
-            //context = new ContextTest(builder);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             repo = new UserRepository(context);
