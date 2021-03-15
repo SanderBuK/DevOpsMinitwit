@@ -6,20 +6,31 @@ using MiniTwit.Entities;
 using Xunit;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using MiniTwit.Models;
+using Microsoft.Data.Sqlite;
 
 namespace Models.Test
 {
-    public class UserRepositoryTests
+    public class UserRepositoryTests : IDisposable
     {
         private readonly MiniTwitContext context;
         private readonly UserRepository repo;
 
         public UserRepositoryTests()
         {
-            var builder = new DbContextOptionsBuilder<MiniTwitContext>().UseSqlite("DataSource=:memory:");
-            context = new ContextTest(builder.Options);
+            var builder = new DbContextOptionsBuilder<MiniTwitContext>();
+            builder.UseInMemoryDatabase(databaseName: "MiniTwitDatabase");   //.UseSqlite("datasource=:memory:");
+
+            var dbContextOptions = builder.Options;
+            context = new MiniTwitContext(dbContextOptions);
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+
             repo = new UserRepository(context);
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
 
         [Fact]
@@ -29,18 +40,22 @@ namespace Models.Test
                 new UserCreateDTO
                 {
                     Username = "userTest",
-                    Email = "userTest@mail.io",
+                    Email = "userTest@mail.com",
                     Password = "123"
-                }
-                );
-            var userQuery = from u in context.Users where u.Username == "userTest" select u;
+                });
+
+            var userQuery = from u in context.Users 
+                            where u.Username == "userTest" 
+                            select u;
+            
             var user = await userQuery.FirstOrDefaultAsync();
 
             Assert.NotNull(user);
             Assert.Equal("userTest", user.Username);
-            Assert.Equal("userTest@mail.io", user.Email);
+            Assert.Equal("userTest@mail.com", user.Email);
             Assert.NotEqual("123", user.PwHash);
         }
+
 
         //could be a nice test to have
         /*
@@ -203,18 +218,6 @@ namespace Models.Test
         }
         */
 
-        [Fact]
-        public async Task follow_existing_user()
-        {
-            //var result = await repo.FollowUser("olduser1", "olduser2");
-            var followeduser = await repo.FollowUser("olduser2", "olduser1");
-            var followinguser = await repo.FollowUser("olduser1", "olduser2");
-
-            //Assert.Equal(0, result);
-            Assert.True(await repo.IsFollowing("olduser1", "olduser2"));
-            Assert.True(await repo.IsFollowing("olduser2", "olduser1"));
-        }
-
         /*
         [Fact]
         public async Task follow_from_nonexisting_user()
@@ -244,6 +247,18 @@ namespace Models.Test
             Assert.Equal(-1, result);
         }
         */
+
+        [Fact]
+        public async Task follow_existing_user()
+        {
+            //var result = await repo.FollowUser("olduser1", "olduser2");
+            var followeduser = await repo.FollowUser("olduser2", "olduser1");
+            var followinguser = await repo.FollowUser("olduser1", "olduser2");
+
+            //Assert.Equal(0, result);
+            Assert.True(await repo.IsFollowing("olduser1", "olduser2"));
+            Assert.True(await repo.IsFollowing("olduser2", "olduser1"));
+        }
 
         [Fact]
         public async Task unfollow_existing_user_being_followed()
@@ -296,11 +311,5 @@ namespace Models.Test
         }
         */
 
-        /*
-        public void Dispose()
-        {
-            context.Dispose();
-        }
-        */
     }
 }
