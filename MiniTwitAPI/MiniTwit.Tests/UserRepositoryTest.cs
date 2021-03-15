@@ -28,17 +28,6 @@ namespace Models.Test
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             repo = new UserRepository(context);
-
-            //connection = new SqliteConnection("DataSource=:memory:");
-            //connection.Open();
-
-            //options = new DbContextOptionsBuilder()
-            //    .UseSqlite(connection)
-            //    .Options;
-
-            //using (var context = new ContextTest(options) )
-            //    context.Database.EnsureCreated();
-            //repo = new UserRepository(context);
         }
         public void Dispose()
         {
@@ -65,6 +54,7 @@ namespace Models.Test
             Assert.Equal("userTest@mail.com", user.Email);
             Assert.NotEqual("123", user.PwHash);
         }
+
 
         //could be a nice test to have
         /*
