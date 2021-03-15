@@ -1,18 +1,24 @@
 version: "3"
+
 services:
     webapi:
         build:
             context: .
             dockerfile: Dockerfile-api
         image: jemol/minitwit_api:latest
+        container_name: minitwitapi
         ports: 
         - "5001:80"
+        depends_on:
+        - prometheus
+        - grafana
 
     blazor_web_app:
         build:
             context: .
             dockerfile: Dockerfile-blazor
         image: jemol/minitwit_blazor:latest
+        container_name: minitwitweb
         ports: 
         - "8001:80"
 
@@ -23,7 +29,6 @@ services:
         - ./prometheus.yml:/etc/prometheus/prometheus.yml
         ports:
         - "9090:9090"
-
 
     grafana:
         image: grafana/grafana:4.5.2
