@@ -27,9 +27,6 @@ namespace MiniTwit.Models
             var user_id = await Task.Run(() => (from u in _context.Users
                                                 where u.Username == username
                                                 select u.UserId).FirstOrDefault());
-            var user_id = await Task.Run(() => (from u in _context.Users
-                                                where u.Username == username
-                                                select u.UserId).FirstOrDefault());
             return user_id;
         }
 
