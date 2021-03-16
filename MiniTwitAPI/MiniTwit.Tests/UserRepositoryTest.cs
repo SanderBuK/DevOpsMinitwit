@@ -21,7 +21,7 @@ namespace Models.Test
             builder.UseInMemoryDatabase(databaseName: "MiniTwitDatabase");   //.UseSqlite("datasource=:memory:");
 
             var dbContextOptions = builder.Options;
-            context = new MiniTwitContext(dbContextOptions);
+            context = new ContextTest(dbContextOptions);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
@@ -269,6 +269,20 @@ namespace Models.Test
             //Assert.Equal(0, result);
             Assert.False(await repo.IsFollowing("olduser1", "olduser2"));
             Assert.False(await repo.IsFollowing("olduser2", "olduser1"));
+        }
+
+        [Fact]
+        public async Task get_userId_by_username()
+        {
+            var userId1 = await repo.GetUserId("olduser1");
+            var userId2 = await repo.GetUserId("olduser2");
+            var userId3 = await repo.GetUserId("olduser3");
+            var userId4 = await repo.GetUserId("olduser4");
+
+            Assert.Equal(1, userId1);
+            Assert.Equal(2, userId2);
+            Assert.Equal(3, userId3);
+            Assert.Equal(4, userId4);
         }
 
         /*
