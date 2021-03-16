@@ -32,5 +32,7 @@ services:
 
     grafana:
         image: grafana/grafana:4.5.2
+        volumes:
+        - ./docker_data/grafana_data:/var/lib/grafana
         ports:
         - "3000:3000"
