@@ -24,6 +24,6 @@ scrape_configs:
     scrape_interval: 5s
 
     static_configs:
-      - targets: ['host.docker.internal:5001']
+      - targets: ['174.138.104.119:5001']
         labels:
           group: 'production'
