@@ -4,6 +4,7 @@ using System.Net;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MiniTwit.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -162,6 +163,31 @@ namespace MiniTwit.Models
                                         .AnyAsync(f => f.WhomId == followsId);
 
             return following;
+        }
+
+        public int TotalUsers()
+        {
+            return _context.Users.Count();
+        }
+
+        public int AverageMessagesPostedByUser()
+        {
+            return _context.Messages.Count() / _context.Users.Count();
+        }
+
+        public int AverageFollowsByUser()
+        {
+            return _context.Followers.Count() / _context.Users.Count();
+        }
+
+        public int TotalFollows()
+        {
+            return _context.Followers.Count();
+        }
+
+        public int TotalMessages()
+        {
+            return _context.Messages.Count();
         }
     }
 }
