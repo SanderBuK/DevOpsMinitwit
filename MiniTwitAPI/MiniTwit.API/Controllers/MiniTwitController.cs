@@ -44,11 +44,11 @@ namespace MiniTwit.API.Controllers
             _userRepository = userRepository;
             _messageRepository = messageRepository;
             _memoryCache = memoryCache;
-            TotalUsers.IncTo(_userRepository.TotalUsers());
-            TotalFollowers.IncTo(_userRepository.TotalFollows());
-            AverageFollows.IncTo(_userRepository.AverageFollowsByUser());
-            AverageMessages.IncTo(_userRepository.AverageMessagesPostedByUser());
-            TotalMessages.IncTo(_userRepository.TotalMessages());
+            //TotalUsers.IncTo(_userRepository.TotalUsers());
+            //TotalFollowers.IncTo(_userRepository.TotalFollows());
+            //AverageFollows.IncTo(_userRepository.AverageFollowsByUser());
+            //AverageMessages.IncTo(_userRepository.AverageMessagesPostedByUser());
+            //TotalMessages.IncTo(_userRepository.TotalMessages());
         }
 
         [HttpGet]
@@ -90,7 +90,7 @@ namespace MiniTwit.API.Controllers
             _memoryCache.Set(CacheFields.Latest, latest);
             await _messageRepository.AddMessage(request, username);
             //AverageMessages.IncTo(_userRepository.AverageMessagesPostedByUser());
-            await TotalMessages.IncAsync();
+            //TotalMessages.Inc();
             return NoContent();
         }
 
@@ -103,15 +103,15 @@ namespace MiniTwit.API.Controllers
             if (request.follow != null)
             {
                 response = await _userRepository.FollowUser(username, request.follow);
-                await TotalFollowers.IncAsync();
+                //TotalFollowers.Inc();
             }
             else if(request.unfollow != null)
             {
                 response = await _userRepository.UnfollowUser(username, request.unfollow);
-                await TotalFollowers.DecAsync();
+                //TotalFollowers.Inc(-1);
             }
            
-            await AverageFollows.IncToAsync(_userRepository.AverageFollowsByUser());
+            //AverageFollows.IncTo(_userRepository.AverageFollowsByUser());
             
             return new StatusCodeResult((int)response);
         }
@@ -136,7 +136,7 @@ namespace MiniTwit.API.Controllers
 
             if (user == null) return BadRequest();
             
-            await TotalUsers.IncAsync();
+            //TotalUsers.Inc();
             return NoContent();
         }
         public async Task<User> Register(RegisterDTO registration)
