@@ -19,6 +19,6 @@ jobs:
       id: runinfersharp
       uses: ./
       with:
-        binary-path: 'MiniTwitAPI'
+        binary-path: 'minitwitapi'
     - name: Infer# analysis results
       run: echo "${{ steps.runinfersharp.outputs.results }}"
