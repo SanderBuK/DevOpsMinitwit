@@ -14,7 +14,7 @@ jobs:
         uses: github/codeql-action/init@v1
         
       - name: Autobuild
-      - run: |
+        run: |
           dotnet build MiniTwitAPI/MiniTwitAPI.sln /p:UseSharedCompilation=false 
 
       - name: Perform CodeQL Analysis
