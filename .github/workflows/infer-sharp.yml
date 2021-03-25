@@ -1,0 +1,24 @@
+name: Run Infer# Analysis
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.100'
+
+    - name: Build with dotnet
+      run: dotnet build MiniTwitAPI/MiniTwitAPI.sln
+    
+    - name: Run Infer#
+      id: runinfersharp
+      uses: ./
+      with:
+        binary-path: 'minitwitapi'
+    - name: Infer# analysis results
+      run: echo "${{ steps.runinfersharp.outputs.results }}"
