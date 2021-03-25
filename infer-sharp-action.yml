@@ -11,6 +11,6 @@ outputs:
     description: 'The analysis results'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'Dockerfile-infer'
   args:
     - ${{ inputs.binary-path }}
