@@ -17,7 +17,7 @@ jobs:
     
     - name: Run Infer#
       id: runinfersharp
-      uses: ./infer-sharp-action.yml
+      uses: ./
       with:
         binary-path: 'MiniTwitAPI'
     - name: Infer# analysis results
