@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MiniTwit.Entities;
 using Xunit;
-using Microsoft.EntityFrameworkCore.Sqlite;
 using MiniTwit.Models;
-using Microsoft.Data.Sqlite;
 using Models.Test;
 
 namespace MiniTwit.Tests
@@ -72,42 +67,6 @@ namespace MiniTwit.Tests
 
             Assert.Null(result);
         }
-
-        /*
         
-
-        [Fact]
-        public async Task delete_existing_message()
-        {
-            var messageId = await repo.CreateAsync("testtext", "olduser2");
-            var messagebefore = await repo.ReadAsync(messageId);
-            var result = await repo.DeleteAsync(messageId);
-            var messageafter = await repo.ReadAsync(messageId);
-
-            Assert.NotNull(messagebefore);
-            Assert.Null(messageafter);
-            Assert.Equal(messageId, result);
-        }
-
-        [Fact]
-        public async Task delete_nonexisting_message()
-        {
-            var result = await repo.DeleteAsync(1337);
-
-            Assert.Equal(-1, result);
-        }
-
-        [Fact]
-        public async Task readall_messages()
-        {
-            await repo.CreateAsync("testtext1", "olduser1");
-            var first = await repo.ReadAllAsync();
-            await repo.CreateAsync("testtext2", "olduser1");
-            var second = await repo.ReadAllAsync();
-
-            Assert.Equal(2, first.Count);
-            Assert.Equal(3, second.Count);
-        }
-        */
     }
 }
