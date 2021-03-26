@@ -15,6 +15,6 @@ namespace MiniTwit.Entities
         [Column("who_id", TypeName = "integer")]
         public int WhoId { get; set; }
         [Column("whom_id", TypeName = "integer")]
-        public int WhomId { get; set; }
+        public int WhomId {get; set;}
     }
 }

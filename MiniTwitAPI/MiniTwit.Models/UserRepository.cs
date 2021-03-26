@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 using MiniTwit.Entities;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.HttpStatusCode;
@@ -27,6 +26,7 @@ namespace MiniTwit.Models
             var user_id = await Task.Run(() => (from u in _context.Users
                                                 where u.Username == username
                                                 select u.UserId).FirstOrDefault());
+            
             return user_id;
         }
 
@@ -36,18 +36,18 @@ namespace MiniTwit.Models
             {
                 var WhoId = await GetUserId(username);
                 var WhomId = await GetUserId(followName);
-
                 var follower = new Follower
-                {
-                    WhoId = (int) WhoId,
-                    WhomId = (int) WhomId
-                };
+                               {
+                                    WhoId = (int) WhoId,
+                                    WhomId = (int) WhomId
+                               };
 
                 _context.Followers.Add(follower);
                 await _context.SaveChangesAsync();
 
                 return NoContent;
             }
+
             return BadRequest;
         }
 
@@ -67,6 +67,7 @@ namespace MiniTwit.Models
 
                 return NoContent;
             }
+
             return BadRequest;
         }
 
@@ -75,13 +76,13 @@ namespace MiniTwit.Models
             var messages = await _context.Messages.Skip(_context.Messages.Count() - per_page)
                                 .Where(m => m.Flagged == 0)
                                 .Join(_context.Users,
-                                    m => m.AuthorId,
-                                    u => u.UserId, (m, u) =>
-                                    new TimelineDTO
-                                    {
+                                      m => m.AuthorId,
+                                      u => u.UserId, (m, u) =>
+                                      new TimelineDTO
+                                      {
                                         message = m,
                                         user = u
-                                    })
+                                      })
                                 .OrderByDescending(tl => tl.message.PubDate)
                                 .Select(tl => tl)
                                 .ToListAsync();
@@ -102,10 +103,10 @@ namespace MiniTwit.Models
                                                  )
                                                  orderby m.PubDate descending
                                                  select new TimelineDTO
-                                                 {
-                                                     message = m,
-                                                     user = u
-                                                 }).Take(per_page).ToList());
+                                                            {
+                                                                message = m,
+                                                                user = u
+                                                            }).Take(per_page).ToList());
 
             return messages;
         }
@@ -135,6 +136,7 @@ namespace MiniTwit.Models
 
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
+
             return entity;
         }
 
@@ -142,11 +144,12 @@ namespace MiniTwit.Models
         {
             var user = await (from u in _context.Users
                               where u.Username == username
-                              select u).FirstOrDefaultAsync();
+                              select u)
+                              .FirstOrDefaultAsync();
 
             if (user == null) return null; //wrong username
-
             if (GenerateHash(password) != user.PwHash) return null; //wrong password
+
             return user;
         }
 
@@ -160,6 +163,31 @@ namespace MiniTwit.Models
                                         .AnyAsync(f => f.WhomId == followsId);
 
             return following;
+        }
+
+        public int TotalUsers()
+        {
+            return _context.Users.Count();
+        }
+
+        public int AverageMessagesPostedByUser()
+        {
+            return _context.Messages.Count() / _context.Users.Count();
+        }
+
+        public int AverageFollowsByUser()
+        {
+            return _context.Followers.Count() / _context.Users.Count();
+        }
+
+        public int TotalFollows()
+        {
+            return _context.Followers.Count();
+        }
+
+        public int TotalMessages()
+        {
+            return _context.Messages.Count();
         }
     }
 }

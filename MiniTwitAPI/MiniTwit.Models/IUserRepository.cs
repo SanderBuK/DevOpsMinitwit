@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MiniTwit.Entities;
@@ -17,5 +16,12 @@ namespace MiniTwit.Models
         Task<User> RegisterUser(UserCreateDTO user);
         string GenerateHash(string password);
         Task<bool> IsFollowing(string follower, string follows);
+        int TotalUsers();
+        int AverageMessagesPostedByUser();
+
+        int AverageFollowsByUser();
+
+        int TotalFollows();
+        int TotalMessages();
     }
 }

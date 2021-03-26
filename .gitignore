@@ -137,6 +137,5 @@ $RECYCLE.BIN/
 
 _NCrunch*
 .vs/slnx.sqlite
-MiniTwitAPI/.vs/MiniTwitAPI/v16/TestStore/0/000.testlog
-*.testlog
-MiniTwitAPI/.vs/MiniTwitAPI/v16/TestStore/0/testlog.manifest
+
+MiniTwitAPI/.vs/
