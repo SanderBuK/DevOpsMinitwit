@@ -65,22 +65,16 @@ namespace MiniTwit.Tests
             Assert.Equal(messageId, getMessage.MessageId);
         }
 
-        /*
-        [Fact]
-        public async Task create_message_non_existing_user()
-        {
-            var result = await repo.CreateAsync("testtext", "nonuser");
-
-            Assert.Equal(-1, result);
-        }
-
         [Fact]
         public async Task read_nonexisting_message()
         {
-            var result = await repo.ReadAsync(1337);
+            var result = await repo.GetMessage(1337);
 
             Assert.Null(result);
         }
+
+        /*
+        
 
         [Fact]
         public async Task delete_existing_message()
