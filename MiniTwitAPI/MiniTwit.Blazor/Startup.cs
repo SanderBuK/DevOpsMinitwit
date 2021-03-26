@@ -62,7 +62,6 @@ namespace MiniTwit.Blazor
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

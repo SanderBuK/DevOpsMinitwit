@@ -1,5 +1,4 @@
 @page "/{username}"
-
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @using MiniTwit.Entities
 @using MiniTwit.Models
@@ -35,11 +34,11 @@
         </div>
     }
 }
-
 <Timeline messages="@messages" />
 
-@code {
 
+
+@code {
     public IEnumerable<TimelineDTO> messages;
 
     [Parameter]
@@ -63,18 +62,18 @@
     private async void FollowUser()
     {
         await controller.FollowUser(new FollowDTO
-        {
-            follow = username
-        }, currentUser.Username);
+                                        {
+                                            follow = username
+                                        }, currentUser.Username);
         NavManager.NavigateTo($"/{username}", forceLoad: true);
     }
 
     private async void UnfollowUser()
     {
         await controller.FollowUser(new FollowDTO
-        {
-            unfollow = username
-        }, currentUser.Username);
+                                        {
+                                            unfollow = username
+                                        }, currentUser.Username);
         NavManager.NavigateTo($"/{username}", forceLoad: true);
     }
 }

@@ -10,7 +10,7 @@
 @if (currentUser != null)
 {<h2>My Timeline</h2>
     <div class=twitbox>
-        <h3>What's on your mind @currentUser.Username?</h3>
+        <h3>What's on your mind @currentUser.Username? Share it with the world!</h3>
         <p>
             <input type=text name=text size=60 @bind-value="@message">
             <!--
@@ -18,7 +18,7 @@
             <input type=submit value="Share" @onclick="@PostMessage">
         </p>
     </div>
-    <Timeline messages="@messages" />
+    <Timeline messages="@messages"/>
 }
 
 @code{
