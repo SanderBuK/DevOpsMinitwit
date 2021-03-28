@@ -1,13 +1,11 @@
-name: Docker
+name: SonarCloud
 
 on:
   push:
-    # Publish `main` as Docker `latest` image.
     branches:
       - 'feature/73/codeAnalysis'
 
 env:
-  # TODO: Change variable to your image's name.
   COMPOSE_FILE: docker-compose.yml
 
 jobs:
