@@ -13,12 +13,12 @@ jobs:
         dotnet-version: '5.0.100'
 
     - name: Build with dotnet
-      run: dotnet build MiniTwitAPI/MiniTwitAPI.sln
+      run: dotnet publish MiniTwitAPI/MiniTwitAPI.sln
     
     - name: Run Infer#
       id: runinfersharp
       uses: microsoft/infersharpaction@v1.0
       with:
-        binary-path: 'minitwitapi'
+        binary-path: 'bin/Debug/netcoreapp3.1'
     - name: Infer# analysis results
       run: echo "${{ steps.runinfersharp.outputs.results }}"
