@@ -4,6 +4,9 @@ on: [push]
 
 jobs:
   CodeQL-Build:
+    defaults: 
+      run: 
+        working-directory: ./MiniTwitAPI
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +17,7 @@ jobs:
         uses: github/codeql-action/init@v1
         
       - name: Autobuild
-        run: dotnet build MiniTwitAPI/MiniTwitAPI.sln /p:UseSharedCompilation=false 
+        run: dotnet build MiniTwitAPI.sln /p:UseSharedCompilation=false 
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
