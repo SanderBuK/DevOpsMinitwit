@@ -1,28 +1,4 @@
-#name: CodeQL Analysis
-#
-#on: [push]
-#
-#jobs:
-#  CodeQL-Build:
-#    defaults: 
-#      run: 
-#        working-directory: ./MiniTwitAPI
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#
-#      - name: Initialize CodeQL
-#        uses: github/codeql-action/init@v1
-#        with:
-#          languages: 'csharp'
-#        
-#      - name: Autobuild
-#        run: dotnet build MiniTwitAPI.sln /p:UseSharedCompilation=false 
-#
-#      - name: Perform CodeQL Analysis
-#        uses: github/codeql-action/analyze@v1
+# FROM: https://wouterdekort.com/2020/06/24/why-github-code-scanning-is-awesome/
 
 
 # For most projects, this workflow file will not need changing; you simply need
@@ -55,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp', 'csharp', 'python' ]
+        language: [ 'csharp' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
