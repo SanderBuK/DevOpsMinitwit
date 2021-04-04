@@ -137,4 +137,13 @@ $RECYCLE.BIN/
 
 _NCrunch*
 .vs/slnx.sqlite
+
 MiniTwitAPI/.vs/
+dbserver/.vagrant/bundler/global.sol
+dbserver/.vagrant/machines/dbserver/digital_ocean/creator_uid
+dbserver/.vagrant/machines/dbserver/digital_ocean/id
+dbserver/.vagrant/machines/dbserver/digital_ocean/index_uuid
+dbserver/.vagrant/machines/dbserver/digital_ocean/vagrant_cwd
+dbserver/.vagrant/rgloader/loader.rb
+MiniTwitAPI/.idea/.idea.MiniTwitAPI/.idea/riderModule.iml
+MiniTwitAPI/.idea/.idea.MiniTwitAPI/.idea/riderModule.iml
