@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: build containers
         run: |
+          source setup_elk.sh
           docker-compose up -d
           
       - name: push images
