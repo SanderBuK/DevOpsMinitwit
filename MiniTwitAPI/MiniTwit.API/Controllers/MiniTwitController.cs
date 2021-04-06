@@ -64,7 +64,7 @@ namespace MiniTwit.API.Controllers
         }
 
         [HttpGet("msgs/")]
-        public async Task<IEnumerable<TimelineDTO>> GetMessages(int no = 30, int latest = 0)
+        public async Task<IEnumerable<TimelineDTO>> GetMessages([FromQuery] int no, [FromQuery] int latest) //int no = 30, int latest = 0)
         {
             _memoryCache.Set(CacheFields.Latest, latest);
             return await _userRepository.PublicTimeline(no);

@@ -25,6 +25,7 @@
         {
             <li><em>There's no messages so far.</em></li>
         }
+        <button class="btn btn-primary" @onclick="@(() => AddMessages(20))">Load more messages</button>
     }
 </ul>
 
@@ -62,4 +63,5 @@
 
         return "Unknown";
     }
+
 }
