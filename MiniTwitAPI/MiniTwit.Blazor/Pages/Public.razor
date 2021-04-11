@@ -4,33 +4,21 @@
 @inject MiniTwitController controller
 
 <h2>Public Timeline</h2>
-@if (messages == null)
+@if(messages == null)
 {
     <p>Loading...</p>
 }
 else
 {
-    <Timeline messages="@messages" />
-    <div class="btn-center">
-        <button class="btn btn-primary" @onclick="@(() => AddMessages(30))">Load more messages</button>
-    </div>
+    <Timeline messages="@messages"/>   
 }
-
-
 
 @code
 {
     public IEnumerable<TimelineDTO> messages;
-    public int messagesPerPage = 30;
 
     protected override async Task OnInitializedAsync()
     {
         messages = await controller.GetMessages();
-    }
-
-    public async void AddMessages(int addMessagesNumber)
-    {
-        messagesPerPage += addMessagesNumber;
-        messages = await controller.GetMessages(messagesPerPage);
     }
 }

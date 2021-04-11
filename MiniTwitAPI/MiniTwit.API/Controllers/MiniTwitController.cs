@@ -142,11 +142,11 @@ namespace MiniTwit.API.Controllers
         public async Task<User> Register(RegisterDTO registration)
         {
             var dto = new UserCreateDTO()
-                        {
-                            Username = registration.username,
-                            Password = registration.pwd,
-                            Email = registration.email
-                        };
+            {
+                Username = registration.username,
+                Password = registration.pwd,
+                Email = registration.email
+            };
 
             var user = await _userRepository.RegisterUser(dto);
 
