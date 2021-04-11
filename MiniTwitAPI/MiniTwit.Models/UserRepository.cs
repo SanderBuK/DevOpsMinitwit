@@ -73,7 +73,7 @@ namespace MiniTwit.Models
 
         public async Task<IEnumerable<TimelineDTO>> PublicTimeline(int numberOfMessages) //number of all messages now..
         {
-            var messages = await _context.Messages.Skip(_context.Messages.Count() - 30) //the number 30 needs to be a variable 
+            var messages = await _context.Messages.Skip(_context.Messages.Count() - numberOfMessages) //the number 30 needs to be a variable 
                                 .Where(m => m.Flagged == 0)
                                 .Join(_context.Users,
                                       m => m.AuthorId,
@@ -97,9 +97,9 @@ namespace MiniTwit.Models
                                                  join u in _context.Users on m.AuthorId equals u.UserId
                                                  where m.Flagged == 0 && (
                                                      u.UserId == userid || _context.Followers
-                                                                                         .Where(f => f.WhoId == userid)
-                                                                                         .Select(f => f.WhomId)
-                                                                                         .Contains(u.UserId)
+                                                                            .Where(f => f.WhoId == userid)
+                                                                            .Select(f => f.WhomId)
+                                                                            .Contains(u.UserId)
                                                  )
                                                  orderby m.PubDate descending
                                                  select new TimelineDTO
@@ -128,11 +128,11 @@ namespace MiniTwit.Models
 
             //FIX: ID increments by 2
             var entity = new User
-            {
-                Username = user.Username,
-                PwHash = GenerateHash(user.Password),
-                Email = user.Email
-            };
+                        {
+                            Username = user.Username,
+                            PwHash = GenerateHash(user.Password),
+                            Email = user.Email
+                        };
 
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
