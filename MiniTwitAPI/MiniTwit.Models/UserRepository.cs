@@ -71,9 +71,9 @@ namespace MiniTwit.Models
             return BadRequest;
         }
 
-        public async Task<IEnumerable<TimelineDTO>> PublicTimeline(int numberOfMessages) //number of all messages now..
+        public async Task<IEnumerable<TimelineDTO>> PublicTimeline(int numberOfMessages) 
         {
-            var messages = await _context.Messages.Skip(_context.Messages.Count() - numberOfMessages) //the number 30 needs to be a variable 
+            var messages = await _context.Messages.Skip(_context.Messages.Count() - numberOfMessages) 
                                 .Where(m => m.Flagged == 0)
                                 .Join(_context.Users,
                                       m => m.AuthorId,
