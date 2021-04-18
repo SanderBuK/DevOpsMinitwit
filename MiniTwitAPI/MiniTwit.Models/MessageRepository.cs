@@ -23,12 +23,12 @@ namespace MiniTwit.Models
             var userId = await GetUserId(username);
 
             var newMessage = new Message
-            {
-                AuthorId = userId,
-                Text = message.content,
-                PubDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-                Flagged = 0
-            };
+                                {
+                                    AuthorId = userId,
+                                    Text = message.content,
+                                    PubDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                                    Flagged = 0
+                                };
 
             _context.Messages.Add(newMessage);
             await _context.SaveChangesAsync();
@@ -56,13 +56,13 @@ namespace MiniTwit.Models
             var message = Task.Run(() => (from m in _context.Messages
                                           where m.MessageId == messageId
                                           select new Message
-                                          {
-                                              AuthorId = m.AuthorId,
-                                              MessageId = m.MessageId,
-                                              PubDate = m.PubDate,
-                                              Flagged = m.Flagged,
-                                              Text = m.Text
-                                          }).FirstOrDefault());
+                                                      {
+                                                          AuthorId = m.AuthorId,
+                                                          MessageId = m.MessageId,
+                                                          PubDate = m.PubDate,
+                                                          Flagged = m.Flagged,
+                                                          Text = m.Text
+                                                      }).FirstOrDefault());
             
             return await message;
         }
@@ -75,10 +75,10 @@ namespace MiniTwit.Models
                                         join u in _context.Users on m.AuthorId equals u.UserId
                                   where m.AuthorId == userId
                                   select new TimelineDTO
-                                  {
-                                      message = m,
-                                      user = u
-                                  }).Take(per_page).ToListAsync();
+                                              {
+                                                  message = m,
+                                                  user = u
+                                              }).Take(per_page).ToListAsync();
 
             return messages;
         }
@@ -87,13 +87,13 @@ namespace MiniTwit.Models
         {
             var messages = Task.Run(() => (from m in _context.Messages
                                            select new Message
-                                           {
-                                               AuthorId = m.AuthorId,
-                                               MessageId = m.MessageId,
-                                               PubDate = m.PubDate,
-                                               Flagged = m.Flagged,
-                                               Text = m.Text
-                                           }).ToList());
+                                                       {
+                                                           AuthorId = m.AuthorId,
+                                                           MessageId = m.MessageId,
+                                                           PubDate = m.PubDate,
+                                                           Flagged = m.Flagged,
+                                                           Text = m.Text
+                                                       }).ToList());
             
             return await messages;
         }
