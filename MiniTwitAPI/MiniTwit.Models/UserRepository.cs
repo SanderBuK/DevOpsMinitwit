@@ -4,7 +4,6 @@ using System.Net;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using MiniTwit.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -37,10 +36,10 @@ namespace MiniTwit.Models
                 var WhoId = await GetUserId(username);
                 var WhomId = await GetUserId(followName);
                 var follower = new Follower
-                               {
-                                    WhoId = (int) WhoId,
-                                    WhomId = (int) WhomId
-                               };
+                                   {
+                                        WhoId = (int) WhoId,
+                                        WhomId = (int) WhomId
+                                   };
 
                 _context.Followers.Add(follower);
                 await _context.SaveChangesAsync();
@@ -79,10 +78,10 @@ namespace MiniTwit.Models
                                       m => m.AuthorId,
                                       u => u.UserId, (m, u) =>
                                           new TimelineDTO
-                                          {
-                                            message = m,
-                                            user = u
-                                          })
+                                                {
+                                                message = m,
+                                                user = u
+                                                })
                                 .OrderByDescending(tl => tl.message.PubDate)
                                 .Select(tl => tl)
                                 .ToListAsync();
@@ -115,7 +114,6 @@ namespace MiniTwit.Models
         public string GenerateHash(string password)
         {
             using var sha256 = SHA256.Create();
-
             var hash = sha256.ComputeHash(Encoding.ASCII.GetBytes(password));
 
             return Encoding.ASCII.GetString(hash, 0, hash.Length);
@@ -128,11 +126,11 @@ namespace MiniTwit.Models
 
             //FIX: ID increments by 2
             var entity = new User
-                        {
-                            Username = user.Username,
-                            PwHash = GenerateHash(user.Password),
-                            Email = user.Email
-                        };
+                            {
+                                Username = user.Username,
+                                PwHash = GenerateHash(user.Password),
+                                Email = user.Email
+                            };
 
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -147,8 +145,14 @@ namespace MiniTwit.Models
                               select u)
                               .FirstOrDefaultAsync();
 
-            if (user == null) return null; //wrong username
-            if (GenerateHash(password) != user.PwHash) return null; //wrong password
+            if (user == null)
+            {
+                return null; //wrong username
+            }
+            if (GenerateHash(password) != user.PwHash)
+            {
+                return null; //wrong password
+            }
 
             return user;
         }

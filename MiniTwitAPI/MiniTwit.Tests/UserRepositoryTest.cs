@@ -38,11 +38,11 @@ namespace Models.Test
         {
             var result = await repo.RegisterUser(
                 new UserCreateDTO
-                {
-                    Username = "userTest",
-                    Email = "userTest@mail.com",
-                    Password = "123"
-                });
+                    {
+                        Username = "userTest",
+                        Email = "userTest@mail.com",
+                        Password = "123"
+                    });
 
             var userQuery = from u in context.Users 
                             where u.Username == "userTest" 
