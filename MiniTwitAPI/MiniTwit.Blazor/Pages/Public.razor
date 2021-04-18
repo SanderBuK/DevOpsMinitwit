@@ -4,6 +4,7 @@
 @inject MiniTwitController controller
 
 <h2>Public Timeline</h2>
+
 @if (messages == null)
 {
     <p>Loading...</p>
@@ -15,8 +16,6 @@ else
         <button class="btn btn-primary" @onclick="@(() => AddMessages(30))">Load more messages</button>
     </div>
 }
-
-
 
 @code
 {
