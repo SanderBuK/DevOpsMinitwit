@@ -5,11 +5,14 @@
 @inject MiniTwitController controller
 @inject NavigationManager NavManager
 
+
 <h2>Sign In</h2>
+
 @if (@error != null)
 {
     <div class=error><strong>Error:</strong>@error</div>
 }
+
 <dl>
     <dt>Username:</dt>
     <dd><input type=text name=username size=30 @bind-value="@username"></dd>
@@ -27,21 +30,34 @@
     private async void Signin()
     {
         error = null;
-        if (username == "") error = "Please enter a username";
-        if (password == "") error = "Please enter a password";
+
+        if (username == "")
+        {
+            error = "Please enter a username";
+        }
+
+        if (password == "")
+        {
+            error = "Please enter a password";
+        }
+
         if (error == null)
         {
             var user = await controller.Login(new Models.LoginDTO
-            {
-                username = username,
-                password = password
-            });
+                                                            {
+                                                                username = username,
+                                                                password = password
+                                                            });
+
             if (user != null)
             {
                 await sessionStorage.SetItemAsync("user", user);
                 NavManager.NavigateTo("/", forceLoad: true);
             }
-            else {error = "Wrong username or password";}
+            else 
+            {
+                error = "Wrong username or password";
+            }
         }
     }
 }
