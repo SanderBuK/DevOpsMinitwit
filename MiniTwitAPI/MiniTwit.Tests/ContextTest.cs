@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using MiniTwit.Entities;
-using MiniTwit.Models;
 
 namespace Models.Test
 {

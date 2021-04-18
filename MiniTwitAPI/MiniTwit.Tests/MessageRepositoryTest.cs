@@ -35,9 +35,10 @@ namespace MiniTwit.Tests
         public async Task create_and_message_existing_user_get_id()
         {
             var result = await repo.AddMessage(
-                                                new MessageCreateDTO {
-                                                    content = "this is a new post"
-                                                }, 
+                                                new MessageCreateDTO 
+                                                    {
+                                                        content = "this is a new post"
+                                                    }, 
                                                 "olduser1");
             int messageId = 1;
          
@@ -49,9 +50,9 @@ namespace MiniTwit.Tests
         {
             var result = await repo.AddMessage(
                                                 new MessageCreateDTO
-                                                {
-                                                    content = "this is a new post"
-                                                },
+                                                    {
+                                                        content = "this is a new post"
+                                                    },
                                                 "olduser1");
             int messageId = 1;
             var getMessage = await repo.GetMessage(messageId);
