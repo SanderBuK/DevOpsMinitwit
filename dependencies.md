@@ -1,15 +1,35 @@
 Go to http://www.webgraphviz.com/ and paste the following:
 
 ```
-digraph G {
+digraph application {
+
+  "Kibana" -> "Elasticsearch"
+  "Kibana" -> "Nginx"
+  "Elasticsearch" -> "API"
+  "Elasticsearch" -> "Nginx"
+   "API" -> "Serilog"
+
+  "Grafana" -> "Prometheus"
+  "Prometheus" -> "API"
+  "API" -> "Prometheus-net"
+
   "Blazor" -> "API"
   "Blazor" -> "SessionStorage"
   "Blazor" -> "EntityFramework"
   "Blazor" -> "MySQL"
+
   "API" -> "Microsoft CachingMemory"
-  "API" -> "AspNet Core"
+  "API" -> "ASP.Net Core"
   "API" -> "EntityFramework"
   "API" -> "MySQL"
-  "API" -> "Swagger"
+
+  "Docker-compose" -> "Grafana"
+  "Docker-compose" -> "Kibana"
+  "Docker-compose" -> "Blazor"
+  "Docker-compose" -> "API"
+  "Docker-compose" -> "Prometheus"
+  "Docker-compose" -> "Elasticsearch"
+
+  "Github Actions" -> "Docker-compose"
 }
 ```
