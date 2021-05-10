@@ -9,6 +9,7 @@
 <!doctype html>
 <title>{% block title %}Welcome{% endblock %} | MiniTwit</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
 <div class=page>
     <h1>MiniTwit</h1>
     <div class=navigation>
@@ -18,7 +19,7 @@
                 <div>
                     <a href="">My Timeline</a> |
                     <a href="public">Public Timeline</a> |
-                    <a href="public" @onclick="@Logout">Sign out - @currentUser.Username</a>
+                    <a href="public" @onclick="@Logout">Sign Out - @currentUser.Username</a>
                 </div>
             }
             else
@@ -31,6 +32,7 @@
             }
         }
     </div>
+
     @*{% with flashes = get_flashed_messages() %}
         {% if flashes %}
         <ul class=flashes>
@@ -41,11 +43,13 @@
         </ul>
         {% endif %}
         {% endwith %}*@
+    
     <div class=body>
         @Body
     </div>
+    
     <div class=footer>
-        MiniTwit &mdash; A Blazor Application
+        MiniTwit &mdash; A Blazor Application &mdash; Made by Helle, Jeppe, Sander and Thomas
     </div>
 </div>
 

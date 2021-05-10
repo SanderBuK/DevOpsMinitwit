@@ -25,14 +25,12 @@
         {
             <li><em>There's no messages so far.</em></li>
         }
-
-        
     }
 </ul>
 
 @code {
 
-    [Parameter] public IEnumerable<TimelineDTO> messages { get; set; }
+    [Parameter] public IEnumerable<TimelineDTO> messages {get; set;}
     private readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
     //Taken from https://gist.github.com/danesparza/973923

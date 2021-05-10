@@ -19,14 +19,14 @@
                 else if (isFollowing)
                 {
                     <div>
-                        You are currently following this user.
+                        <p>You are currently following this user.</p>
                         <a class=unfollow href="@username" @onclick="@UnfollowUser">Unfollow user</a>.
                     </div>
                 }
                 else
                 {
                     <div>
-                        You are not yet following this user.
+                        <p>You are not yet following this user.</p>
                         <a class=follow href="@username" @onclick="@FollowUser">Follow user</a>.
                     </div>
                 }
@@ -42,7 +42,7 @@
     public IEnumerable<TimelineDTO> messages;
 
     [Parameter]
-    public String username { get; set; }
+    public String username {get; set;}
     private User currentUser;
     private bool isFollowing;
 
@@ -53,8 +53,16 @@
             currentUser = await sessionStorage.GetItemAsync<User>("user");
             currentUser = currentUser == null || currentUser.UserId == 0 ? null : currentUser;
             messages = await controller.GetUserMessages(username);
-            if (currentUser == null) isFollowing = false;
-            else isFollowing = await controller.IsFollowing(currentUser.Username, username);
+            
+            if (currentUser == null)
+            {
+                isFollowing = false;
+            }
+            else
+            {
+                isFollowing = await controller.IsFollowing(currentUser.Username, username);
+            }
+            
             StateHasChanged();
         }
     }

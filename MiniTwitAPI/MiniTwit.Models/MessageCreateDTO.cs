@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace MiniTwit.Models
+﻿namespace MiniTwit.Models
 {
     public class MessageCreateDTO
     {

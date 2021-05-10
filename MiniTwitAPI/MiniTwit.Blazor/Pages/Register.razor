@@ -8,10 +8,12 @@
 <title>Sign Up</title>
 
 <h2>Sign Up</h2>
+
 @if (@error != null)
 {
     <div class=error><strong>Error:</strong>@error</div>
 }
+
 <dl>
     <dt>Username:</dt>
     <dd><input type=text name=username size=30 @bind-value="@username"></dd>
@@ -34,10 +36,27 @@
     private async void Signup()
     {
         error = null;
-        if (username == "") error = "Please enter a username";
-        if (email == "") error = "Please enter an email";
-        if (password == "") error = "Please enter a password";
-        if (password != password2) error = "The passwords don't match";
+
+        if (username == "")
+        {
+            error = "Please enter a username";
+        }
+
+        if (email == "")
+        {
+            error = "Please enter an email";
+        }
+        
+        if (password == "")
+        {
+            error = "Please enter a password";
+        }
+        
+        if (password != password2)
+        {
+            error = "The passwords don't match";
+        }
+        
         if (error == null)
         {
             var user = await controller.Register(new Models.RegisterDTO
@@ -46,6 +65,7 @@
                                                                 email = email,
                                                                 pwd = password
                                                             });
+
             if (user != null)
             {
                 await sessionStorage.SetItemAsync("user", user);

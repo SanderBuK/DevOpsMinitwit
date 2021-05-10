@@ -8,13 +8,12 @@
 @inject NavigationManager NavManager
 
 @if (currentUser != null)
-{<h2>My Timeline</h2>
+{
+    <h2>My Timeline</h2>
     <div class=twitbox>
         <h3>What's on your mind @currentUser.Username? Share it with the world!</h3>
         <p>
             <input type=text name=text size=60 @bind-value="@message">
-            <!--
-            -->
             <input type=submit value="Share" @onclick="@PostMessage">
         </p>
     </div>
@@ -32,18 +31,26 @@
         {
             currentUser = await sessionStorage.GetItemAsync<User>("user");
             currentUser = currentUser == null || currentUser.UserId == 0 ? null : currentUser;
-            if (currentUser == null) NavManager.NavigateTo("/public");
-            else messages = await controller.GetFeed(currentUser.UserId);
-            StateHasChanged();
+            if (currentUser == null)
+            {
+                NavManager.NavigateTo("/public");
+            }
+            else
+            {
+                messages = await controller.GetFeed(currentUser.UserId);
+                StateHasChanged();
+            }
         }
     }
 
     private async void PostMessage()
     {
-        await controller.PostUserMessages(new MessageCreateDTO
-        {
-            content = message
-        }, currentUser.Username);
+        await controller.PostUserMessages(
+                                            new MessageCreateDTO 
+                                            {
+                                                content = message
+                                            },
+                                            currentUser.Username);
         NavManager.NavigateTo("/", forceLoad: true);
     }
 }
