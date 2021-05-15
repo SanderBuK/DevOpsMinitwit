@@ -13,8 +13,3 @@ jobs:
         with:
           root_file: main.tex
           working_directory: ./report
-      - name: Move file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "report/main.pdf"
-          target: "report/build/report.pdf"
