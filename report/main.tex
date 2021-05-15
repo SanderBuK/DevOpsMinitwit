@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\title{DevOps Rapport}
+\author{hefr & sank & thda & jemm}
+\date{May 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{System's Perspective}
+
+\subsection{Design of your ITU-MiniTwit systems}
+
+\subsection{Architecture of your ITU-MiniTwit systems}
+
+\subsection{All dependencies of your ITU-MiniTwit systems on all levels of abstraction and development stages}
+That is, list and briefly describe all technologies and tools you applied and depend on.
+
+\subsection{Important interactions of subsystems}
+
+\subsection{Describe the current state of your systems, for example using results of static analysis and quality assessment systems.}
+
+
+\subsection{Finally, describe briefly, if the license that you have chosen for your project is actually compatible with the licenses of all your direct dependencies.}
+
+
+\section{Process' perspective}
+
+\subsection{How do you interact as developers?}
+Within the group we have created a Discord server, which has been our main form of communication. This has both been used for sharing documents, holding meetings, and peer programming.
+
+Furthermore, we have used the "issues" feature on GitHub, using the provided Kanban board. This has also been used as a means of communication - communicating tasks to do, and how far along with the individual tasks, that we were.
+
+\subsection{How is the team organized?}
+Our team consists of 4 developers, and uses the "Centralized Workflow", where we have one mono-repository, in which every developer synchronizes their work with. By the usage of "issues" on GitHub, work on the same modules or features by several developers at the same time is limited. This is to prevent merge conflicts and duplication of work. The centralized workflow allows for us to have no power imbalances, and for each to provide value to the project evenly.
+
+\subsection{A complete description of stages and tools included in the CI/CD chains}
+That is, including deployment and release of your systems.
+
+\subsection{Organization of your repositor(ies)}
+That is, either the structure of of mono-repository or organization of artifacts across repositories.
+In essence, it has to be be clear what is stored where and why.
+
+We are using a mono-repository where both the API and the Blazor-application is kept. This is to ensure that all modules that co-exist are versioned correctly, and will be able to run together, as an entity. This is very useful, as we have adopted GitHub Actions, where the API and Blazor is built from files from our repository, and pushed to Docker Hub. This simplifies the process of handling different versions of applications, and also simplifies the CI/CD chain, as only one repository is needed to collaborate and execute the program.
+
+\subsection{Applied branching strategy.}
+We will be using a variant of the Github Flow. This involves creating an issue for every feature/fix/change needed to be done. Then creating a branch from 'development' with a name along the lines of feature/issue-num/descriptive-name. Then closing the issue when the branch is merged back into 'development'.
+
+\subsection{Applied development process and tools supporting it}
+We used the tools within Github a lot. For tasks we used Githubs Issue feature. Furthermore we created labels, which allowed us to get a better overview of what was smaller bug fixes, and what was bigger features. We also used Githubs projects board, in order to track what issues were open, closed, in progress, and in review.
+
+\subsection{How do you monitor your systems and what precisely do you monitor?}
+For monitoring we use Grafana and Prometheus. We monitor the total number of messages and users in the form of a graph and a count of the average number og messages and followers per user. We also have a heatmap with buckets of 
+
+\subsection{What do you log in your systems and how do you aggregate logs?}
+
+\subsection{Brief results of the security assessment.}
+
+\subsection{Applied strategy for scaling and load balancing.}
+We tried out hands at using Docker-Swarm to scale and load balance our system. This involved creating docker-machines, to host out application. 
+
+\section{Lessons Learned Perspective}
+\subsection{Evolution and refactoring}
+\subsection{Operation}
+\subsection{Maintenance}
+
+\newpage
+\includegraphics[width=\textwidth]{images/2wall.jpg}
+
+\end{document}
