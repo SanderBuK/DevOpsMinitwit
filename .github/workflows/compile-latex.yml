@@ -12,7 +12,13 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
-          working_directory: ./report
-      - uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
+          working_directory: ./report        
+      - name: Move report
+        uses: canastro/copy-file-action@master
         with:
-            add: 'report/main.pdf'
+          source: "report/main.pdf"
+          target: "report/build/report.pdf"
+      - name: Commit report
+        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
+        with:
+            add: 'report/build/report.pdf'
