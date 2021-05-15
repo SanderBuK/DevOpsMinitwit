@@ -1,11 +1,6 @@
 name: Compile Latex and Release PDF  
 
-
 on: [push]
-  
-defaults:
-  run:
-    working-directory: ./report
     
 jobs:
   build_latex:
@@ -17,3 +12,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
+          working_directory: ./report
+      - name: Move file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "report/main.pdf"
+          target: "report/build/report.pdf"
